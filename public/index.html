@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    Hola a todos
+    <script src="socket.io/socket.io.js"></script>
+    <script>
+        let client = io();
+        client.on('connect', () => { console.log("Client connected") });
+        client.on('disconnect', () => { console.log("Client disconnected") });
+        client.emit("mensaje", { saludo: "jovanny" })
+        client.on("respuesta", (payload) => {
+            console.log("Respuesta del servidor", payload);
+        })
+    </script>
+</body>
+
+</html>
