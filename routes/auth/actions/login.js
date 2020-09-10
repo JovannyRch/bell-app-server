@@ -1,10 +1,11 @@
-const { PrismaClient } = require("@prisma/client")
+const { PrismaClient } = require("@prisma/client");
 const prisma = new PrismaClient();
 
 const login = async (req, res) => {
     const { body: { email, password } } = req;
+
     try {
-        if (!email || !password) throw new Error("Input fields incomplete");
+
         let user = await prisma.user.findOne({
             where: {
                 email
