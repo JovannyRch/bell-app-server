@@ -7,7 +7,7 @@ const genJWT = (userId, role) => {
         };
 
         jsw.sign(payload, process.env.JWT_KEY, {
-            expiresIn: '7d'
+            expiresIn: '24h'
         }, (err, token) => {
             if (err) {
                 reject("Can not generate jsw");

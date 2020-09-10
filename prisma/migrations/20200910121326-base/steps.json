@@ -470,6 +470,13 @@
       "arity": "List"
     },
     {
+      "tag": "CreateField",
+      "model": "group",
+      "field": "invitation",
+      "type": "invitation",
+      "arity": "List"
+    },
+    {
       "tag": "CreateDirective",
       "location": {
         "path": {
@@ -728,6 +735,59 @@
           "tag": "Field",
           "model": "invitation",
           "field": "user_invitation_toIdTouser"
+        },
+        "directive": "relation"
+      },
+      "argument": "references",
+      "value": "[id]"
+    },
+    {
+      "tag": "CreateField",
+      "model": "invitation",
+      "field": "groupId",
+      "type": "Int",
+      "arity": "Required"
+    },
+    {
+      "tag": "CreateField",
+      "model": "invitation",
+      "field": "group",
+      "type": "group",
+      "arity": "Required"
+    },
+    {
+      "tag": "CreateDirective",
+      "location": {
+        "path": {
+          "tag": "Field",
+          "model": "invitation",
+          "field": "group"
+        },
+        "directive": "relation"
+      }
+    },
+    {
+      "tag": "CreateArgument",
+      "location": {
+        "tag": "Directive",
+        "path": {
+          "tag": "Field",
+          "model": "invitation",
+          "field": "group"
+        },
+        "directive": "relation"
+      },
+      "argument": "fields",
+      "value": "[groupId]"
+    },
+    {
+      "tag": "CreateArgument",
+      "location": {
+        "tag": "Directive",
+        "path": {
+          "tag": "Field",
+          "model": "invitation",
+          "field": "group"
         },
         "directive": "relation"
       },

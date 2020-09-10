@@ -11,7 +11,7 @@ const register = async (req, res) => {
         //Validate unique user
         let user = await prisma.user.findOne({ where: { email } })
         if (user) {
-            return res.status(400).json({ msg: "Email is already registered" });
+            return res.status(400).json({ msg: "Email has been already registered" });
         }
         //Encrypt password
         const salt = bcrypt.genSaltSync();

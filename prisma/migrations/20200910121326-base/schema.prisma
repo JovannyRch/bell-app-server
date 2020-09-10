@@ -28,6 +28,7 @@ model group {
     usersongroups usersongroups[]
 
     @@index([creatorId], name: "creatorId")
+    invitation invitation[]
 }
 
 model invitation {
@@ -38,7 +39,8 @@ model invitation {
     status                       invitation_status @default(WAITING)
     user_invitation_fromIdTouser user              @relation("invitation_fromIdTouser", fields: [fromId], references: [id])
     user_invitation_toIdTouser   user              @relation("invitation_toIdTouser", fields: [toId], references: [id])
-
+    groupId                      Int
+    group                        group             @relation(fields: [groupId], references: [id])
     @@index([fromId], name: "fromId")
     @@index([toId], name: "toId")
 }

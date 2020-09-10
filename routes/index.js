@@ -1,21 +1,11 @@
 const { Router } = require('express');
-const login = require('./auth/actions/login');
-const register = require('./auth/actions/register');
-const { check } = require('express-validator');
-const fieldValidator = require('../middlewares/fieldValidator');
 const router = Router();
+const auth = require('./auth');
+const invitation = require('./invitations');
+const groups = require('./groups');
 
-router.post('/login', [
-    check('email', 'Email field is required').notEmpty(),
-    check('password', 'Password field is required').notEmpty(),
-    fieldValidator
-], login)
-
-router.post('/register', [
-    check('email', 'Email field is required').notEmpty(),
-    check('email', 'Invalid email format').isEmail(),
-    check('password', 'Password field is required').notEmpty(),
-    fieldValidator
-], register)
+router.use("/auth", auth);
+router.use("/invitation", invitation);
+router.use("/groups", groups);
 
 module.exports = router;
