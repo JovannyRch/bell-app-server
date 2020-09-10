@@ -1,5 +1,6 @@
 const { PrismaClient } = require("@prisma/client");
 const bcrypt = require("bcrypt");
+const genJWT = require("../../../helpers/jwt");
 const prisma = new PrismaClient();
 
 const register = async (req, res) => {
@@ -17,7 +18,8 @@ const register = async (req, res) => {
         const passwordEncrypt = bcrypt.hashSync(password, salt);
 
         let newUser = await prisma.user.create({ data: { name, email, password: passwordEncrypt } });
-        res.json(newUser);
+        let jwt = await genJWT(newUser.id, newUser.role);
+        res.json({ ...newUser, token: jwt });
     } catch (error) {
         res.status(400).json({ msg: error.message })
     }
