@@ -14,9 +14,18 @@
         let client = io();
         client.on('connect', () => { console.log("Client connected") });
         client.on('disconnect', () => { console.log("Client disconnected") });
-        client.emit("mensaje", { saludo: "jovanny" })
+        
         client.on("respuesta", (payload) => {
             console.log("Respuesta del servidor", payload);
+        })
+
+        client.on('send-message', (payload) => {
+            console.log(payload);
+        })
+
+        
+        client.on('notification', (payload) => {
+            console.log("Se ha recibido una de ",payload);
         })
     </script>
 </body>

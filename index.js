@@ -1,6 +1,11 @@
 const express = require('express');
 const app = express();
 const path = require('path');
+const { PrismaClient } = require("@prisma/client");
+const router = require('./routes');
+const prisma = new PrismaClient()
+
+
 
 require('dotenv').config();
 
@@ -9,24 +14,23 @@ const publicPath = path.resolve(__dirname, 'public');
 
 app.use(express.static(publicPath));
 
+//Middlewares
+app.use(express.json());
+
+//Routes
+app.use('/api', router);
 
 //Server 
 const server = require('http').createServer(app);
 const io = require('socket.io')(server);
+module.exports.io = io;
 
-app.get('/saludo', (req, res) => {
-    res.json({
-        saludo: 'hola a todos'
-    })
-})
 
-io.on('connection', client => {
-    client.on('disconnect', () => { console.log("Se desconecto el cliente") });
-    client.on('mensaje', (payload) => {
-        client.emit("respuesta", `Se recibio tu respuesta ${JSON.stringify(payload)}`)
-        console.log(payload)
-    })
-})
+require('./sockets');
+
+
+
+
 
 server.listen(process.env.PORT, error => {
     if (error) {

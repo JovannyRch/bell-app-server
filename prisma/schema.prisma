@@ -1,0 +1,97 @@
+datasource db {
+    url      = env("DATABASE_URL")
+    provider = "mysql"
+}
+
+generator client {
+    provider = "prisma-client-js"
+}
+
+model User {
+    id            Int              @id @default(autoincrement())
+    createdAt     DateTime         @default(now())
+    email         String           @unique
+    name          String
+    password      String
+    isPremium     Boolean
+    role          Role             @default(USER)
+    registration  RegistrationType @default(EMAIL)
+    Group         Group[]          @relation("creator")
+    UsersOnGroups UsersOnGroups[]
+
+    Enroll     Enroll[]
+    Invitation Invitation[]
+}
+
+model Enroll {
+    id        Int           @id @default(autoincrement())
+    user      User          @relation(fields: [userId], references: [id])
+    userId    Int
+    createdAt DateTime      @default(now())
+    type      EnrollTypes   @default(FREE_TO_PREMIUM)
+    method    PaymentMethod @default(NONE)
+}
+
+model Invitation {
+    id        Int              @id @default(autoincrement())
+    createdAt DateTime         @default(now())
+    from      User             @relation(fields: [fromId], references: [id], name: "creator")
+    fromId    Int
+    toId      Int
+    to        User             @relation(fields: [toId], references: [id])
+    status    InvitationStatus @default(WAITING)
+}
+
+model Group {
+    id            Int             @id @default(autoincrement())
+    createdAt     DateTime        @default(now())
+    updatedAt     DateTime        @default(now())
+    creatorId     Int
+    Creator       User            @relation(fields: [creatorId], references: [id], name: "creator")
+    name          String
+    UsersOnGroups UsersOnGroups[]
+}
+
+model UsersOnGroups {
+    user      User      @relation(fields: [userId], references: [id])
+    userId    Int
+    group     Group     @relation(fields: [groupId], references: [id])
+    groupId   Int
+    createdAt DateTime  @default(now())
+    role      RoleGroup @default(NORMAL)
+    @@id([userId, groupId])
+}
+
+enum PaymentMethod {
+    NONE
+    CARD
+    PAYPAL
+}
+
+enum RegistrationType {
+    EMAIL
+    GOOGLE
+    LINKEDIN
+    FACEBOOK
+}
+
+enum InvitationStatus {
+    ACCEPTED
+    DECLINED
+    WAITING
+}
+
+enum EnrollTypes {
+    FREE_TO_PREMIUM
+    PREMIUM_TO_FREE
+}
+
+enum RoleGroup {
+    ADMIN
+    NORMAL
+}
+
+enum Role {
+    USER
+    ADMIN
+}

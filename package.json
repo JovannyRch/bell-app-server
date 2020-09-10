@@ -5,17 +5,28 @@
   "main": "index.js",
   "scripts": {
     "start": "node index.js",
-    "dev": "nodemon index.js"
+    "dev": "nodemon index.js",
+    "prisma:migrate": "prisma migrate save --experimental && prisma migrate up --experimental",
+    "prisma:save": "prisma migrate save --experimental",
+    "prisma:up": "prisma migrate up --experimental",
+    "prisma:introspect": "prisma introspect",
+    "prisma:generate": "prisma generate"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "bcrypt": "^5.0.0",
+    "cors": "^2.8.5",
     "dotenv": "^8.2.0",
     "express": "^4.17.1",
+    "express-validator": "^6.6.1",
+    "jsonwebtoken": "^8.5.1",
+    "@prisma/client": "2.6.2",
     "socket.io": "^2.3.0"
   },
   "devDependencies": {
-    "nodemon": "^2.0.4"
+    "nodemon": "^2.0.4",
+    "@prisma/client": "2.6.2"
   }
 }
