@@ -92,6 +92,7 @@ enum invitation_status {
 
 enum user_role {
     USER
+    LEAD
     ADMIN
 }
 

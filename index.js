@@ -3,7 +3,7 @@ const app = express();
 const path = require('path');
 const { PrismaClient } = require("@prisma/client");
 const router = require('./routes');
-const prisma = new PrismaClient()
+const cors = require('cors');
 
 
 
@@ -13,7 +13,7 @@ const publicPath = path.resolve(__dirname, 'public');
 
 
 app.use(express.static(publicPath));
-
+app.use(cors());
 //Middlewares
 app.use(express.json());
 

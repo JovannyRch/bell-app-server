@@ -24,14 +24,13 @@ const login = async (req, res) => {
         //Gen jwt
         const token = await genJWT(user.id, user.role);
         delete user.password;
-        res.json({
-            ...user,
-            token,
-        })
-
-        res.json(user);
+        delete user.registration;
+        return res.json({
+            user,
+            token
+        });
     } catch (error) {
-        res.status(300).json({ msg: error.message });
+        return res.status(300).json({ msg: error.message });
     }
 
 }

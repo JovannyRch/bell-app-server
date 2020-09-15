@@ -18,8 +18,10 @@ const register = async (req, res) => {
         const passwordEncrypt = bcrypt.hashSync(password, salt);
 
         let newUser = await prisma.user.create({ data: { name, email, password: passwordEncrypt } });
-        let jwt = await genJWT(newUser.id, newUser.role);
-        res.json({ ...newUser, token: jwt });
+        let token = await genJWT(newUser.id, newUser.role);
+        delete newUser.registration;
+        delete newUser.password;
+        res.json({ user: newUser, token });
     } catch (error) {
         res.status(400).json({ msg: error.message })
     }
