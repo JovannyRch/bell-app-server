@@ -32,6 +32,7 @@
       "enum": "user_role",
       "values": [
         "USER",
+        "LEAD",
         "ADMIN"
       ]
     },
@@ -472,8 +473,15 @@
     {
       "tag": "CreateField",
       "model": "group",
-      "field": "invitation",
-      "type": "invitation",
+      "field": "deal",
+      "type": "deal",
+      "arity": "List"
+    },
+    {
+      "tag": "CreateField",
+      "model": "group",
+      "field": "code",
+      "type": "code",
       "arity": "List"
     },
     {
@@ -498,11 +506,11 @@
     },
     {
       "tag": "CreateModel",
-      "model": "invitation"
+      "model": "code"
     },
     {
       "tag": "CreateField",
-      "model": "invitation",
+      "model": "code",
       "field": "id",
       "type": "Int",
       "arity": "Required"
@@ -512,7 +520,7 @@
       "location": {
         "path": {
           "tag": "Field",
-          "model": "invitation",
+          "model": "code",
           "field": "id"
         },
         "directive": "default"
@@ -524,7 +532,7 @@
         "tag": "Directive",
         "path": {
           "tag": "Field",
-          "model": "invitation",
+          "model": "code",
           "field": "id"
         },
         "directive": "default"
@@ -537,7 +545,7 @@
       "location": {
         "path": {
           "tag": "Field",
-          "model": "invitation",
+          "model": "code",
           "field": "id"
         },
         "directive": "id"
@@ -545,7 +553,7 @@
     },
     {
       "tag": "CreateField",
-      "model": "invitation",
+      "model": "code",
       "field": "createdAt",
       "type": "DateTime",
       "arity": "Required"
@@ -555,7 +563,7 @@
       "location": {
         "path": {
           "tag": "Field",
-          "model": "invitation",
+          "model": "code",
           "field": "createdAt"
         },
         "directive": "default"
@@ -567,7 +575,7 @@
         "tag": "Directive",
         "path": {
           "tag": "Field",
-          "model": "invitation",
+          "model": "code",
           "field": "createdAt"
         },
         "directive": "default"
@@ -577,21 +585,7 @@
     },
     {
       "tag": "CreateField",
-      "model": "invitation",
-      "field": "fromId",
-      "type": "Int",
-      "arity": "Required"
-    },
-    {
-      "tag": "CreateField",
-      "model": "invitation",
-      "field": "toId",
-      "type": "Int",
-      "arity": "Required"
-    },
-    {
-      "tag": "CreateField",
-      "model": "invitation",
+      "model": "code",
       "field": "status",
       "type": "invitation_status",
       "arity": "Required"
@@ -601,7 +595,7 @@
       "location": {
         "path": {
           "tag": "Field",
-          "model": "invitation",
+          "model": "code",
           "field": "status"
         },
         "directive": "default"
@@ -613,7 +607,7 @@
         "tag": "Directive",
         "path": {
           "tag": "Field",
-          "model": "invitation",
+          "model": "code",
           "field": "status"
         },
         "directive": "default"
@@ -623,134 +617,14 @@
     },
     {
       "tag": "CreateField",
-      "model": "invitation",
-      "field": "user_invitation_fromIdTouser",
-      "type": "user",
-      "arity": "Required"
-    },
-    {
-      "tag": "CreateDirective",
-      "location": {
-        "path": {
-          "tag": "Field",
-          "model": "invitation",
-          "field": "user_invitation_fromIdTouser"
-        },
-        "directive": "relation"
-      }
-    },
-    {
-      "tag": "CreateArgument",
-      "location": {
-        "tag": "Directive",
-        "path": {
-          "tag": "Field",
-          "model": "invitation",
-          "field": "user_invitation_fromIdTouser"
-        },
-        "directive": "relation"
-      },
-      "argument": "",
-      "value": "\"invitation_fromIdTouser\""
-    },
-    {
-      "tag": "CreateArgument",
-      "location": {
-        "tag": "Directive",
-        "path": {
-          "tag": "Field",
-          "model": "invitation",
-          "field": "user_invitation_fromIdTouser"
-        },
-        "directive": "relation"
-      },
-      "argument": "fields",
-      "value": "[fromId]"
-    },
-    {
-      "tag": "CreateArgument",
-      "location": {
-        "tag": "Directive",
-        "path": {
-          "tag": "Field",
-          "model": "invitation",
-          "field": "user_invitation_fromIdTouser"
-        },
-        "directive": "relation"
-      },
-      "argument": "references",
-      "value": "[id]"
-    },
-    {
-      "tag": "CreateField",
-      "model": "invitation",
-      "field": "user_invitation_toIdTouser",
-      "type": "user",
-      "arity": "Required"
-    },
-    {
-      "tag": "CreateDirective",
-      "location": {
-        "path": {
-          "tag": "Field",
-          "model": "invitation",
-          "field": "user_invitation_toIdTouser"
-        },
-        "directive": "relation"
-      }
-    },
-    {
-      "tag": "CreateArgument",
-      "location": {
-        "tag": "Directive",
-        "path": {
-          "tag": "Field",
-          "model": "invitation",
-          "field": "user_invitation_toIdTouser"
-        },
-        "directive": "relation"
-      },
-      "argument": "",
-      "value": "\"invitation_toIdTouser\""
-    },
-    {
-      "tag": "CreateArgument",
-      "location": {
-        "tag": "Directive",
-        "path": {
-          "tag": "Field",
-          "model": "invitation",
-          "field": "user_invitation_toIdTouser"
-        },
-        "directive": "relation"
-      },
-      "argument": "fields",
-      "value": "[toId]"
-    },
-    {
-      "tag": "CreateArgument",
-      "location": {
-        "tag": "Directive",
-        "path": {
-          "tag": "Field",
-          "model": "invitation",
-          "field": "user_invitation_toIdTouser"
-        },
-        "directive": "relation"
-      },
-      "argument": "references",
-      "value": "[id]"
-    },
-    {
-      "tag": "CreateField",
-      "model": "invitation",
+      "model": "code",
       "field": "groupId",
       "type": "Int",
       "arity": "Required"
     },
     {
       "tag": "CreateField",
-      "model": "invitation",
+      "model": "code",
       "field": "group",
       "type": "group",
       "arity": "Required"
@@ -760,7 +634,7 @@
       "location": {
         "path": {
           "tag": "Field",
-          "model": "invitation",
+          "model": "code",
           "field": "group"
         },
         "directive": "relation"
@@ -772,7 +646,7 @@
         "tag": "Directive",
         "path": {
           "tag": "Field",
-          "model": "invitation",
+          "model": "code",
           "field": "group"
         },
         "directive": "relation"
@@ -786,7 +660,7 @@
         "tag": "Directive",
         "path": {
           "tag": "Field",
-          "model": "invitation",
+          "model": "code",
           "field": "group"
         },
         "directive": "relation"
@@ -795,44 +669,11 @@
       "value": "[id]"
     },
     {
-      "tag": "CreateDirective",
-      "location": {
-        "path": {
-          "tag": "Model",
-          "model": "invitation",
-          "arguments": [
-            {
-              "name": "",
-              "value": "[fromId]"
-            },
-            {
-              "name": "name",
-              "value": "\"fromId\""
-            }
-          ]
-        },
-        "directive": "index"
-      }
-    },
-    {
-      "tag": "CreateDirective",
-      "location": {
-        "path": {
-          "tag": "Model",
-          "model": "invitation",
-          "arguments": [
-            {
-              "name": "",
-              "value": "[toId]"
-            },
-            {
-              "name": "name",
-              "value": "\"toId\""
-            }
-          ]
-        },
-        "directive": "index"
-      }
+      "tag": "CreateField",
+      "model": "code",
+      "field": "code",
+      "type": "Int",
+      "arity": "Required"
     },
     {
       "tag": "CreateModel",
@@ -1058,73 +899,208 @@
     {
       "tag": "CreateField",
       "model": "user",
-      "field": "invitation_invitation_fromIdTouser",
-      "type": "invitation",
-      "arity": "List"
-    },
-    {
-      "tag": "CreateDirective",
-      "location": {
-        "path": {
-          "tag": "Field",
-          "model": "user",
-          "field": "invitation_invitation_fromIdTouser"
-        },
-        "directive": "relation"
-      }
-    },
-    {
-      "tag": "CreateArgument",
-      "location": {
-        "tag": "Directive",
-        "path": {
-          "tag": "Field",
-          "model": "user",
-          "field": "invitation_invitation_fromIdTouser"
-        },
-        "directive": "relation"
-      },
-      "argument": "",
-      "value": "\"invitation_fromIdTouser\""
-    },
-    {
-      "tag": "CreateField",
-      "model": "user",
-      "field": "invitation_invitation_toIdTouser",
-      "type": "invitation",
-      "arity": "List"
-    },
-    {
-      "tag": "CreateDirective",
-      "location": {
-        "path": {
-          "tag": "Field",
-          "model": "user",
-          "field": "invitation_invitation_toIdTouser"
-        },
-        "directive": "relation"
-      }
-    },
-    {
-      "tag": "CreateArgument",
-      "location": {
-        "tag": "Directive",
-        "path": {
-          "tag": "Field",
-          "model": "user",
-          "field": "invitation_invitation_toIdTouser"
-        },
-        "directive": "relation"
-      },
-      "argument": "",
-      "value": "\"invitation_toIdTouser\""
-    },
-    {
-      "tag": "CreateField",
-      "model": "user",
       "field": "usersongroups",
       "type": "usersongroups",
       "arity": "List"
+    },
+    {
+      "tag": "CreateField",
+      "model": "user",
+      "field": "deal",
+      "type": "deal",
+      "arity": "List"
+    },
+    {
+      "tag": "CreateModel",
+      "model": "deal"
+    },
+    {
+      "tag": "CreateField",
+      "model": "deal",
+      "field": "id",
+      "type": "Int",
+      "arity": "Required"
+    },
+    {
+      "tag": "CreateDirective",
+      "location": {
+        "path": {
+          "tag": "Field",
+          "model": "deal",
+          "field": "id"
+        },
+        "directive": "default"
+      }
+    },
+    {
+      "tag": "CreateArgument",
+      "location": {
+        "tag": "Directive",
+        "path": {
+          "tag": "Field",
+          "model": "deal",
+          "field": "id"
+        },
+        "directive": "default"
+      },
+      "argument": "",
+      "value": "autoincrement()"
+    },
+    {
+      "tag": "CreateDirective",
+      "location": {
+        "path": {
+          "tag": "Field",
+          "model": "deal",
+          "field": "id"
+        },
+        "directive": "id"
+      }
+    },
+    {
+      "tag": "CreateField",
+      "model": "deal",
+      "field": "createdAt",
+      "type": "DateTime",
+      "arity": "Required"
+    },
+    {
+      "tag": "CreateDirective",
+      "location": {
+        "path": {
+          "tag": "Field",
+          "model": "deal",
+          "field": "createdAt"
+        },
+        "directive": "default"
+      }
+    },
+    {
+      "tag": "CreateArgument",
+      "location": {
+        "tag": "Directive",
+        "path": {
+          "tag": "Field",
+          "model": "deal",
+          "field": "createdAt"
+        },
+        "directive": "default"
+      },
+      "argument": "",
+      "value": "now()"
+    },
+    {
+      "tag": "CreateField",
+      "model": "deal",
+      "field": "creatorId",
+      "type": "Int",
+      "arity": "Required"
+    },
+    {
+      "tag": "CreateField",
+      "model": "deal",
+      "field": "title",
+      "type": "String",
+      "arity": "Required"
+    },
+    {
+      "tag": "CreateField",
+      "model": "deal",
+      "field": "user",
+      "type": "user",
+      "arity": "Required"
+    },
+    {
+      "tag": "CreateDirective",
+      "location": {
+        "path": {
+          "tag": "Field",
+          "model": "deal",
+          "field": "user"
+        },
+        "directive": "relation"
+      }
+    },
+    {
+      "tag": "CreateArgument",
+      "location": {
+        "tag": "Directive",
+        "path": {
+          "tag": "Field",
+          "model": "deal",
+          "field": "user"
+        },
+        "directive": "relation"
+      },
+      "argument": "fields",
+      "value": "[creatorId]"
+    },
+    {
+      "tag": "CreateArgument",
+      "location": {
+        "tag": "Directive",
+        "path": {
+          "tag": "Field",
+          "model": "deal",
+          "field": "user"
+        },
+        "directive": "relation"
+      },
+      "argument": "references",
+      "value": "[id]"
+    },
+    {
+      "tag": "CreateField",
+      "model": "deal",
+      "field": "groupId",
+      "type": "Int",
+      "arity": "Required"
+    },
+    {
+      "tag": "CreateField",
+      "model": "deal",
+      "field": "group",
+      "type": "group",
+      "arity": "Required"
+    },
+    {
+      "tag": "CreateDirective",
+      "location": {
+        "path": {
+          "tag": "Field",
+          "model": "deal",
+          "field": "group"
+        },
+        "directive": "relation"
+      }
+    },
+    {
+      "tag": "CreateArgument",
+      "location": {
+        "tag": "Directive",
+        "path": {
+          "tag": "Field",
+          "model": "deal",
+          "field": "group"
+        },
+        "directive": "relation"
+      },
+      "argument": "fields",
+      "value": "[groupId]"
+    },
+    {
+      "tag": "CreateArgument",
+      "location": {
+        "tag": "Directive",
+        "path": {
+          "tag": "Field",
+          "model": "deal",
+          "field": "group"
+        },
+        "directive": "relation"
+      },
+      "argument": "references",
+      "value": "[id]"
     },
     {
       "tag": "CreateModel",
